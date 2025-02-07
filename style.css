@@ -5,6 +5,8 @@
     --text-dark: #1E293B;
     --accent: #60A5FA;
     --accent-light: #DBEAFE;
+    --social-bg: #6390f1;
+    --social-hover: #6fa0f0;
 }
 
 * {
@@ -23,7 +25,8 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    padding-top: 0.1rem;
+
 }
 
 header {
@@ -51,6 +54,53 @@ header::before {
     100% { transform: scale(1); }
 }
 
+
+.clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    transform: translateZ(0);
+}
+
+.cloud {
+    width: 120px;
+    height: 40px;
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    position: absolute;
+    animation: float 0s infinite linear;
+}
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgb(255, 255, 255);
+}
+
+.cloud::before {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 15px;
+}
+ 
+.cloud::after {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    right: 15px;
+}
+
+@keyframes float {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100vw); }
+}
+
 .intro {
     max-width: 800px;
     margin: 0 auto;
@@ -59,57 +109,120 @@ header::before {
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 3rem;
     margin-bottom: 1rem;
-    background: linear-gradient(45deg, var(--primary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: titleFade 1s ease-in;
+    color: black;
 }
 
-@keyframes titleFade {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.social-icons {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    transition: transform 0.3s ease, color 0.3s ease;
+    opacity: 0.8;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+}
+
+.fa-linkedin:hover {
+    color: #0077b5;
+}
+
+.fa-github:hover {
+    color: #333;
 }
 
 .subtitle {
     font-size: 1.5rem;
-    color: var(--primary);
+    visibility: hidden;
     margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeIn 1s ease-in forwards;
-    animation-delay: 0.5s;
+    position: relative;
+    width: fit-content;
 }
 
-.intro p {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-dark);
-    opacity: 0;
-    animation: fadeIn 1s ease-in forwards;
-    animation-delay: 0.8s;
+.subtitle::before {
+    content: "Specialise in Software Engineering";
+    visibility: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    color: var(--primary);
+    border-right: 1px solid var(--primary);
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(50) forwards,
+               blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary) }
+}
+
+.about-section {
+    background: var(--bg-light);
+    padding: 6rem 0;
+    position: relative;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-content {
+    flex: 1;
+}
+
+.about-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+.about-text {
+    font-size: 1rem;
+    font-style: italic;
     line-height: 1.8;
-}
-
-.intro-details {
-    font-size: 1.1rem;
     color: var(--text-dark);
-    opacity: 0;
-    animation: fadeIn 1s ease-in forwards;
-    animation-delay: 1s;
-    line-height: 1.6;
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+
+/* ======================== PROJECTS ======================== */
+.projects-section {
+    background: var(--secondary);
+    padding: 4rem 0;
 }
 
 .projects {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-    padding: 4rem 0;
+    padding: 1rem 0 7rem 0;
 }
 
 .project-card {
@@ -186,9 +299,9 @@ h1 {
     transform: translateX(5px);
 }
 
-/* Skills Section Styles */
+/* ======================== SKILLS ======================== */
 .skills {
-    background: var(--secondary);
+    background: var(--bg-light);
     padding: 4rem 0;
 }
 
@@ -197,9 +310,6 @@ h1 {
     color: var(--primary);
     text-align: center;
     margin-bottom: 3rem;
-    background: linear-gradient(45deg, var(--primary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 .skills-container {
@@ -227,7 +337,8 @@ h1 {
     gap: 1.5rem;
 }
 
-.skill-item {
+.skill-item,
+.soft-skill-item {
     background: var(--bg-light);
     padding: 1.5rem;
     border-radius: 10px;
@@ -240,16 +351,35 @@ h1 {
     gap: 0.5rem;
 }
 
-.skill-item:hover {
+.skill-item:hover,
+.soft-skill-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(59, 130, 246, 0.2);
 }
 
-.skill-item i {
+.skill-item i,
+.soft-skill-item i {
     font-size: 2rem;
-    color: var(--primary);
     margin-bottom: 0.5rem;
 }
+
+.skill-item img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.soft-skill-item i{
+    color: #3B82F6;
+}
+
+.fa-python { color: #3776AB; }
+.fa-database {
+    background: linear-gradient(45deg, #FF8C00, #FFD700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+ }
 
 .skill-item span {
     font-size: 1rem;
@@ -257,9 +387,9 @@ h1 {
     font-weight: 500;
 }
 
-/* Contact Section Styles */
+/* ======================== CONTACT ======================== */
 .contact {
-    background: var(--bg-light);
+    background: var(--secondary);
     padding: 4rem 0;
 }
 
@@ -304,13 +434,31 @@ h1 {
     font-size: 1.5rem;
 }
 
+/* Social link variations */
+.github {
+    background: var(--social-bg);
+}
+
+.github:hover {
+    background: var(--social-hover);
+}
+
 .linkedin {
-    background: #0077b5;
+    background: var(--social-bg);
 }
 
 .linkedin:hover {
-    background: #006396;
+    background: var(--social-hover);
 }
+
+.email {
+    background: var(--social-bg);
+}
+
+.email:hover {
+    background: var(--social-hover);
+}
+
 
 @media (max-width: 768px) {
     .container {

@@ -1,4 +1,11 @@
 // Add smooth scroll reveal animation
+document.addEventListener('DOMContentLoaded', () => {
+    const subtitle = document.querySelector('.subtitle');
+    if (!subtitle.textContent) {
+        subtitle.textContent = 'Software Engineering Specialist';
+    }
+});
+
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px'
